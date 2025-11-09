@@ -2,7 +2,9 @@
 #include <LCD_Blio.h>
 #include <stdio.h>
 
-void questao2(){
+// A questão 1 era só pra acender os leds da placa, deixar em HIGH PA6  e PA7
+
+void questao2(){ //Fazer um buzzer dar um beep curto, espera, mais 2 beeps curtos
 	  while (1){
 		  Delay_us(1000000);
 
@@ -24,7 +26,7 @@ void questao2(){
 	  }
 }
 
-void questao3(){
+void questao3(){ //Acender dois leds diferentes, um acende aos poucos e outro ao contrário
   int atraso;
 	while(1){
 		for(atraso = 0; atraso <= 10000; atraso += 50){
@@ -52,7 +54,7 @@ void questao3(){
 	}
 }
 
-void questao4(){
+void questao4(){ //Usar os botões K0, K1 e KUP pra acender leds externos
     int botao1 = GPIO_Read_Pin(GPIOA, PIN_0);
     int botao2 = GPIO_Read_Pin(GPIOE, PIN_3);
     int botao3 = GPIO_Read_Pin(GPIOE, PIN_4);
@@ -78,7 +80,7 @@ void questao4(){
     }
 }
 
-void questao5(){
+void questao5(){ //K0 e K1 acendem seus respectivos leds, quando um ta acesso o outro travaado, kup reseta
 	while (1)
 	{
 	    int k1 = !GPIO_Read_Pin(GPIOE, PIN_4); // botão K1
@@ -105,7 +107,7 @@ void questao5(){
 
 }
 
-void questao6(){
+void questao6(){ //Fazer uma contagem binária usando 8 leds
 	int aux = 0;
 	while(1){
 	GPIO_Write_Port(GPIOE, aux);
@@ -117,7 +119,7 @@ void questao6(){
 	}
 }
 
-void questao7(){
+void questao7(){ //Um led andante indo e voltando
 	for(int i = 0; i < 8; i++){
 		if(i-1 < 0){
             GPIO_Write_Pin(GPIOE, i, HIGH);
@@ -137,7 +139,7 @@ void questao7(){
 	}
 }
 
-void questao8(){
+void questao8(){ //simulando um cruzamento, os leds correspondem aos semáforos
 	GPIO_Write_Pin(GPIOE, PIN_0, HIGH); // liga vermelho 1
 	GPIO_Write_Pin(GPIOE, PIN_5, HIGH); // liga verde 2
 
@@ -164,7 +166,7 @@ void questao8(){
 	GPIO_Write_Pin(GPIOE, PIN_3, LOW); // desliga vermelho 2
 }
 
-void questao9(){
+void questao9(){ //contagem hexadecimal indo e voltando num display de 7 segmentos
 	 const uint8_t mask[16]={
 	 0b00111111, //0
 	 0b00000110, //1
@@ -196,7 +198,7 @@ void questao9(){
 	}
 }
 
-void questao10(){
+void questao10(){ //mesma coisa da anterior, mas quando um chega em 16 o outro vai pra 1. Seria um o(n^2)
 	 const uint8_t mask[16]={
 	 0b00111111, //0
 	 0b00000110, //1
@@ -250,7 +252,7 @@ void questao10(){
 
 }
 
-void questao11(){
+void questao11(){ //exibir os nicks meus de vinicius e vinicius num led, e fazer uma contagem regressiva
 	LCD_Init(4, 20);
 	LCD_Display_ON();
 	LCD_Clear();
@@ -272,7 +274,7 @@ void questao11(){
 	}
 }
 
-void questao12(){
+void questao12(){ //usar um motor dc e uma ponte H para um motor acelerar, parar,  e acelerar no sentido oposto
 	while(1){
 		for(int i = 0; i < 2000; i++){
 			GPIO_Write_Pin(GPIOA, 1, HIGH);
@@ -309,7 +311,7 @@ void questao12(){
 	}
 }
 
-void questao13(){
+void questao13(){ //semelhante a anterior
 	void acionar_passo(int passo){
 	    switch(passo){
 	        case 1: GPIO_Write_Port(GPIOA, 0b0001); break;
@@ -359,7 +361,7 @@ void questao13(){
     }
 }
 
-void questao14(){
+void questao14(){ //apagar e acender leds usando interrupção
 	void exibirHexPortA(uint8_t valor) { GPIO_Write_Port(GPIOA, valor);}
 	void exibirHexPortD(uint8_t valor){ GPIO_Write_Port(GPIOD, valor);}
 
@@ -399,7 +401,7 @@ void questao14(){
   }
 }
 
-void questao15(){
+void questao15(){ //acender um led externo somente se os dois botões forem pressionados juntos
 	while(1){
 		if(!GPIO_Read_Pin(GPIOE, 4) && GPIO_Read_Pin(GPIOE, 3)){
 			while(!GPIO_Read_Pin(GPIOE, 4)){
@@ -466,7 +468,7 @@ void questao17(){
 	}
 }
 
-void questao18(){
+void questao18(){ //fazer um teclado de membrana 4x4 ter seus caracteres mostrados num display de 7 segmentos quando pressionados
 	// Set dos binários
 	const uint8_t mask[16] = {
 			0b00111111, //0
@@ -487,7 +489,7 @@ void questao18(){
 			0b01110001  //F
 	};
 
-	while(1){
+	while(1){ //um sensor de proximidade que apita mais quanto mais próximo
 			GPIO_Write_Pin(GPIOD, PIN_0, LOW);
 
 				Delay_ms(5);
