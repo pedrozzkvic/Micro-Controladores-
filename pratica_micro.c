@@ -599,7 +599,7 @@ void questao19(){
 
 
 
-int main{
+int main(){
     while(1){
         questao19
     }
